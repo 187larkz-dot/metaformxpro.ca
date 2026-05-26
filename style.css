@@ -2053,3 +2053,203 @@ p  { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8; }
   .prod-key-claim { flex-direction: column; }
   .prod-specs-box { padding: 24px 20px; }
 }
+
+/* ────────────────────────────────────────────────────────────────
+   PRODUCT PRICE BLOCKS
+   ──────────────────────────────────────────────────────────────── */
+.prod-price-block {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-orange);
+  border-radius: var(--radius-sm);
+  padding: 18px 24px;
+  margin-top: 28px;
+  margin-bottom: 4px;
+  backdrop-filter: blur(12px);
+  transition: all .3s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.prod-price-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(242,88,5,.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.prod-price-block:hover {
+  border-color: var(--orange);
+  background: rgba(242,88,5,.07);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px var(--orange-glow-sm);
+}
+
+/* WoodWash variant */
+.prod-price-wash {
+  border-color: var(--border-wash);
+}
+.prod-price-wash::before {
+  background: linear-gradient(135deg, rgba(0,180,216,.06) 0%, transparent 60%);
+}
+.prod-price-wash:hover {
+  border-color: var(--wash);
+  background: rgba(0,180,216,.07);
+  box-shadow: 0 8px 28px var(--wash-glow-sm);
+}
+
+/* Wood Release BIO variant */
+.prod-price-bio {
+  border-color: var(--border-green);
+}
+.prod-price-bio::before {
+  background: linear-gradient(135deg, rgba(16,185,129,.06) 0%, transparent 60%);
+}
+.prod-price-bio:hover {
+  border-color: var(--green);
+  background: rgba(16,185,129,.07);
+  box-shadow: 0 8px 28px var(--green-glow-sm);
+}
+
+/* Format label */
+.ppb-format {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-head);
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ppb-format i { color: var(--orange); font-size: 1rem; }
+.prod-price-wash .ppb-format i { color: var(--wash); }
+.prod-price-bio  .ppb-format i { color: var(--green); }
+
+.ppb-format::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 28px;
+  background: var(--border-medium);
+  margin-left: 12px;
+}
+
+/* Price number */
+.ppb-amount {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.ppb-num {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: var(--orange);
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+.prod-price-wash .ppb-num { color: var(--wash); }
+.prod-price-bio  .ppb-num { color: var(--green); }
+
+.ppb-currency { font-size: 1.2rem; font-weight: 800; }
+.ppb-tax {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  white-space: nowrap;
+}
+
+/* Right-aligned unit note */
+.ppb-unit {
+  margin-left: auto;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .prod-price-block { flex-wrap: wrap; gap: 12px; }
+  .ppb-unit { margin-left: 0; }
+  .ppb-format::after { display: none; }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   BIO COST BREAKDOWN (par panneau / par cage)
+   ──────────────────────────────────────────────────────────────── */
+.bio-cost-breakdown {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid var(--border-green);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.bcb-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 22px;
+  flex: 1;
+  transition: background .25s var(--ease);
+}
+.bcb-item:hover {
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.bcb-item > i {
+  font-size: 1.3rem;
+  color: var(--green);
+  flex-shrink: 0;
+  opacity: .85;
+}
+
+.bcb-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bcb-val {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: var(--green);
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+
+.bcb-lbl {
+  font-family: var(--font-head);
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+.bcb-lbl small {
+  font-size: .7rem;
+  color: var(--text-muted);
+}
+
+.bcb-sep {
+  width: 1px;
+  background: var(--border-green);
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .bio-cost-breakdown { flex-direction: column; }
+  .bcb-sep { width: 100%; height: 1px; }
+}

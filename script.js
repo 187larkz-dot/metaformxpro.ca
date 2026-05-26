@@ -114,23 +114,25 @@ function initCalculator() {
 
   if (!slider) return;
 
-  const COVERAGE_PER_LITRE    = 50;   // pi² per litre (WoodShield)
-  const PANEL_AREA            = 32;   // pi² per 4x8 panel
-  const PRICE_NEW_PANEL       = 85;   // $ CAD per panel (estimate)
-  const LIFESPAN_MULTIPLIER   = 3.5;  // panels last ~3.5x longer
+  // ─── Constantes basées sur les données réelles du produit ───────────────────
+  // WoodShield : 200 pi²/gallon = 52.84 pi²/L théorique
+  //              Mesuré réel   : 120L pour 10 000 pi²  → 83.33 pi²/L
+  //              0.20 L par panneau (2'×8'6" = 17 pi²) → 85 pi²/L  ✓ cohérent
+  const COVERAGE_PER_LITRE = 83.33;  // pi²/L  (usage réel WoodShield)
+  const WOODWASH_COVERAGE  = 178.57; // pi²/L  (56L pour 10 000 pi²)
+  const PANEL_AREA         = 17;     // pi²    (2 pi × 8 pi 6 po = 17 pi²)
+  // Économies : 10 000 pi² traités = 196 000$ sur 5 ans → 19.60$/pi²
+  const SAVINGS_PER_SQFT   = 19.60;  // $/pi²  d'économie sur 5 ans
 
   function calcAll(surface) {
-    const panels  = Math.ceil(surface / PANEL_AREA);
-    const litres  = Math.ceil(surface / COVERAGE_PER_LITRE);
-    const jugs    = Math.ceil(litres / 20);
-    const sprays  = surface > 1000 ? Math.ceil(surface / 800) : 0;
+    const panels     = Math.ceil(surface / PANEL_AREA);         // nombre de panneaux
+    const litres     = Math.ceil(surface / COVERAGE_PER_LITRE); // litres WoodShield
+    const jugs       = Math.ceil(litres / 20);                  // seaux 20L
+    const washLitres = Math.ceil(surface / WOODWASH_COVERAGE);  // litres WoodWash
+    const sprays     = surface > 500 ? Math.ceil(surface / 500) : 0; // vaporisateurs 1L
+    const savings    = Math.round(surface * SAVINGS_PER_SQFT);  // $ sur 5 ans
 
-    // Savings: panels you'd normally replace × price, multiplied by lifespan factor
-    const savings = Math.round(
-      panels * PRICE_NEW_PANEL * (LIFESPAN_MULTIPLIER - 1) * 0.45
-    );
-
-    return { panels, litres, jugs, sprays, savings };
+    return { panels, litres, jugs, washLitres, sprays, savings };
   }
 
   function fmt(n, suffix = '') {
@@ -143,7 +145,7 @@ function initCalculator() {
 
   function update() {
     const surface = parseInt(slider.value, 10);
-    const { panels, litres, jugs, sprays, savings } = calcAll(surface);
+    const { panels, litres, jugs, washLitres, sprays, savings } = calcAll(surface);
 
     // Update displays
     if (surfaceVal)  surfaceVal.textContent  = fmt(surface, 'pi²');
@@ -152,6 +154,10 @@ function initCalculator() {
     if (resJugs)     resJugs.textContent     = jugs + (jugs > 1 ? ' seaux' : ' seau');
     if (resSprays)   resSprays.textContent   = sprays + (sprays > 1 ? ' bouteilles' : ' bouteille');
     if (calcSavings) calcSavings.textContent = formatMoney(savings);
+
+    // Update WoodWash display if present
+    const resWash = document.getElementById('res-wash');
+    if (resWash) resWash.textContent = washLitres + ' L';
 
     // Update slider gradient
     const pct = ((surface - +slider.min) / (+slider.max - +slider.min)) * 100;
