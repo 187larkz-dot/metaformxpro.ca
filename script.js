@@ -230,7 +230,7 @@ function initNavHighlight() {
 const STRIPE_PRODUCT_URLS = {
   woodshield: 'https://buy.stripe.com/test_aFadR26GJdUF30d2Qz2Ji00',
   woodwash: 'https://buy.stripe.com/test_bJe4gs2qtbMxfMZezh2Ji01',
-  biopaneloil: 'https://buy.stripe.com/test_aFadR26GJdUF30d2Qz2Ji00' // Using woodshield as fallback or custom link if needed
+  biopaneloil: 'https://buy.stripe.com/test_aFaaEQ0il17T7gtcr92Ji02' // Stripe payment link for Wood Release BIO
 };
 
 // Global variables for Stripe checkout state
