@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCalculator();
   initNavHighlight();
   initSliderGradient();
+  initStripeModal();
 });
 
 
@@ -218,4 +219,171 @@ function initNavHighlight() {
   );
 
   sections.forEach(s => io.observe(s));
+}
+
+/* ─────────────────────────────────────────────
+   7. STRIPE PAYMENT MODAL INTEGRATION
+   ───────────────────────────────────────────── */
+// Stripe Checkout Links for each product
+const STRIPE_PRODUCT_URLS = {
+  woodshield: 'https://buy.stripe.com/test_aFadR26GJdUF30d2Qz2Ji00',
+  woodwash: 'https://buy.stripe.com/test_bJe4gs2qtbMxfMZezh2Ji01',
+  biopaneloil: 'https://buy.stripe.com/test_aFadR26GJdUF30d2Qz2Ji00' // Using woodshield as fallback or custom link if needed
+};
+
+// Global variables for Stripe checkout state
+let selectedProduct = 'woodshield';
+let selectedQty = 1;
+
+// Price mapping (in CAD)
+const productPrices = {
+  woodshield: 1495.00,
+  woodwash: 35.95,
+  biopaneloil: 69.95
+};
+
+// Pre-select product in modal and update UI styling
+function selectProduct(productKey) {
+  selectedProduct = productKey;
+  
+  // Update selected class in DOM cards
+  const cards = document.querySelectorAll('.smodal-product');
+  cards.forEach(card => {
+    const cardProd = card.getAttribute('data-product');
+    if (cardProd === productKey) {
+      card.classList.add('selected');
+    } else {
+      card.classList.remove('selected');
+    }
+  });
+  
+  // Update modal active theme attribute for dynamic brand styling
+  const modal = document.getElementById('stripe-modal');
+  if (modal) {
+    modal.setAttribute('data-active-theme', productKey);
+  }
+  
+  // Update subtotal
+  updateSubtotal();
+}
+
+// Update quantity state and UI value
+function updateQuantity(newQty) {
+  if (newQty < 1) newQty = 1;
+  if (newQty > 99) newQty = 99; // safety limit
+  
+  selectedQty = newQty;
+  
+  const qtyVal = document.getElementById('smodal-qty-val');
+  if (qtyVal) {
+    qtyVal.textContent = selectedQty;
+  }
+  
+  // Update subtotal
+  updateSubtotal();
+}
+
+// Compute and format subtotal, and update Stripe Checkout button href
+function updateSubtotal() {
+  const price = productPrices[selectedProduct] || 0;
+  const subtotal = price * selectedQty;
+  
+  // Format subtotal in French Canadian style
+  const subtotalEl = document.getElementById('smodal-subtotal');
+  if (subtotalEl) {
+    subtotalEl.textContent = subtotal.toLocaleString('fr-CA', { 
+      style: 'currency', 
+      currency: 'CAD', 
+      minimumFractionDigits: 2, 
+      maximumFractionDigits: 2 
+    });
+  }
+  
+  // Update checkout button href with quantity query parameter
+  const checkoutBtn = document.getElementById('smodal-checkout-btn');
+  if (checkoutBtn) {
+    const baseUrl = STRIPE_PRODUCT_URLS[selectedProduct] || STRIPE_PRODUCT_URLS['woodshield'];
+    // Append Stripe parameters. Stripe payment links support ?quantity=X
+    checkoutBtn.href = `${baseUrl}?quantity=${selectedQty}`;
+  }
+}
+
+// Global function to open modal (called from inline onclick attributes in products)
+window.openStripeModal = function(productKey) {
+  const overlay = document.getElementById('stripe-modal-overlay');
+  if (!overlay) return;
+  
+  // Select clicked product
+  selectProduct(productKey);
+  
+  // Reset quantity to 1
+  updateQuantity(1);
+  
+  // Open modal with smooth transition
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+};
+
+// Global function to close modal
+window.closeStripeModal = function() {
+  const overlay = document.getElementById('stripe-modal-overlay');
+  if (!overlay) return;
+  
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+};
+
+// Initialisation inside DOMContentLoaded
+function initStripeModal() {
+  const overlay = document.getElementById('stripe-modal-overlay');
+  const closeBtn = document.getElementById('smodal-close');
+  const plusBtn = document.getElementById('smodal-qty-plus');
+  const minusBtn = document.getElementById('smodal-qty-minus');
+  const productCards = document.querySelectorAll('.smodal-product');
+  
+  if (!overlay) return;
+  
+  // Close button click
+  if (closeBtn) {
+    closeBtn.addEventListener('click', window.closeStripeModal);
+  }
+  
+  // Overlay background click (close modal if clicked outside)
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      window.closeStripeModal();
+    }
+  });
+  
+  // Close on Escape key press
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) {
+      window.closeStripeModal();
+    }
+  });
+  
+  // Product card click selectors in modal
+  productCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const productKey = card.getAttribute('data-product');
+      selectProduct(productKey);
+    });
+  });
+  
+  // Quantity Plus button
+  if (plusBtn) {
+    plusBtn.addEventListener('click', () => {
+      updateQuantity(selectedQty + 1);
+    });
+  }
+  
+  // Quantity Minus button
+  if (minusBtn) {
+    minusBtn.addEventListener('click', () => {
+      updateQuantity(selectedQty - 1);
+    });
+  }
+  
+  // Initialize subtotal once on load
+  updateSubtotal();
 }

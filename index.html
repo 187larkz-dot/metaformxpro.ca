@@ -334,9 +334,15 @@
                             <div class="ppb-unit">soit 74,75 $/L</div>
                         </div>
 
-                        <a href="#contact" class="btn btn-primary btn-prod aos-fade-up delay-4" id="woodshield-cta">
-                            <i class="fa-solid fa-paper-plane"></i> Commander le WoodShield
-                        </a>
+                        <button class="btn btn-primary btn-prod aos-fade-up delay-4" id="woodshield-cta" onclick="openStripeModal('woodshield')">
+                            <i class="fa-solid fa-cart-shopping"></i> Commander le WoodShield
+                        </button>
+                        <div class="payment-badges">
+                            <span class="payment-badge"><i class="fa-brands fa-cc-visa"></i> Visa</span>
+                            <span class="payment-badge"><i class="fa-brands fa-cc-mastercard"></i> MC</span>
+                            <span class="payment-badge stripe-badge"><i class="fa-brands fa-stripe-s"></i> Stripe</span>
+                            <span class="payment-badge"><i class="fa-solid fa-lock"></i> Sécurisé</span>
+                        </div>
                     </div>
                 </div>
 
@@ -456,9 +462,15 @@
                             <div class="ppb-unit">par litre</div>
                         </div>
 
-                        <a href="#contact" class="btn btn-wash btn-prod aos-fade-up delay-4" id="woodwash-cta">
-                            <i class="fa-solid fa-paper-plane"></i> Commander le WoodWash
-                        </a>
+                        <button class="btn btn-wash btn-prod aos-fade-up delay-4" id="woodwash-cta" onclick="openStripeModal('woodwash')">
+                            <i class="fa-solid fa-cart-shopping"></i> Commander le WoodWash
+                        </button>
+                        <div class="payment-badges">
+                            <span class="payment-badge"><i class="fa-brands fa-cc-visa"></i> Visa</span>
+                            <span class="payment-badge"><i class="fa-brands fa-cc-mastercard"></i> MC</span>
+                            <span class="payment-badge stripe-badge"><i class="fa-brands fa-stripe-s"></i> Stripe</span>
+                            <span class="payment-badge"><i class="fa-solid fa-lock"></i> Sécurisé</span>
+                        </div>
                     </div>
 
                     <div class="prod-img-col aos-fade-left" id="woodwash-img-col">
@@ -486,7 +498,7 @@
                         <strong>Utilisés ensemble, WoodWash + WoodShield forment un système de protection complet</strong>
                         <p>Nettoyez avec WoodWash, protégez avec WoodShield. Vos panneaux sont prêts pour des années de coffrage sans compromis.</p>
                     </div>
-                    <a href="#contact" class="btn btn-combo" id="combo-cta">Commander les deux</a>
+                    <button class="btn btn-combo" id="combo-cta" onclick="openStripeModal('woodshield')">Commander maintenant</button>
                 </div>
             </div>
         </section>
@@ -567,16 +579,17 @@
                                 <i class="fa-solid fa-bucket"></i> Seau 20&nbsp;L
                             </div>
                             <div class="ppb-amount">
-                                <span class="ppb-num">69,95&nbsp;<span class="ppb-currency">$/L</span></span>
+                                <span class="ppb-num">69,95&nbsp;<span class="ppb-currency">$</span></span>
                                 <span class="ppb-tax">+ taxes</span>
                             </div>
+                            <div class="ppb-unit">soit 3,50&nbsp;$/L</div>
                         </div>
 
                         <div class="bio-cost-breakdown aos-fade-up delay-4" id="bio-cost-breakdown">
                             <div class="bcb-item" id="bcb-panel">
                                 <i class="fa-solid fa-table-cells-large"></i>
                                 <div class="bcb-info">
-                                    <span class="bcb-val">~15&nbsp;$</span>
+                                    <span class="bcb-val">~0,70&nbsp;$</span>
                                     <span class="bcb-lbl">par panneau<br><small>2'&nbsp;&times;&nbsp;8'6"</small></span>
                                 </div>
                             </div>
@@ -584,7 +597,7 @@
                             <div class="bcb-item" id="bcb-cage">
                                 <i class="fa-solid fa-layer-group"></i>
                                 <div class="bcb-info">
-                                    <span class="bcb-val">~300&nbsp;$</span>
+                                    <span class="bcb-val">~14&nbsp;$</span>
                                     <span class="bcb-lbl">par cage<br><small>20&nbsp;panneaux</small></span>
                                 </div>
                             </div>
@@ -610,9 +623,15 @@
                             </div>
                         </div>
 
-                        <a href="#contact" class="btn btn-bio btn-prod aos-fade-up delay-4" id="biopaneloil-cta">
-                            <i class="fa-solid fa-paper-plane"></i> Réserver un lot d'essai
-                        </a>
+                        <button class="btn btn-bio btn-prod aos-fade-up delay-4" id="biopaneloil-cta" onclick="openStripeModal('biopaneloil')">
+                            <i class="fa-solid fa-cart-shopping"></i> Commander Wood Release BIO
+                        </button>
+                        <div class="payment-badges">
+                            <span class="payment-badge"><i class="fa-brands fa-cc-visa"></i> Visa</span>
+                            <span class="payment-badge"><i class="fa-brands fa-cc-mastercard"></i> MC</span>
+                            <span class="payment-badge stripe-badge"><i class="fa-brands fa-stripe-s"></i> Stripe</span>
+                            <span class="payment-badge"><i class="fa-solid fa-lock"></i> Sécurisé</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -729,7 +748,7 @@
                                 <td class="row-label"><i class="fa-solid fa-tag"></i> Prix indicatif</td>
                                 <td><span class="price-val val-shield">1 495 $</span> <span class="tax-label">+ taxes / 20L</span></td>
                                 <td><span class="price-val val-wash">35,95 $</span> <span class="tax-label">+ taxes / 1L</span></td>
-                                <td><span class="price-val val-bio">69,95 $ / L</span> <span class="tax-label">+ taxes</span></td>
+                                <td><span class="price-val val-bio">69,95 $</span> <span class="tax-label">+ taxes / 20L</span></td>
                             </tr>
                             <tr class="row-actions">
                                 <td class="row-label"></td>
@@ -954,6 +973,103 @@
                 </div>
             </div>
         </section>
+
+        <!-- ═══════════════════════════════════════════
+             STRIPE PAYMENT MODAL
+        ═══════════════════════════════════════════ -->
+        <div class="stripe-modal-overlay" id="stripe-modal-overlay">
+            <div class="stripe-modal" id="stripe-modal">
+                <!-- Test mode banner -->
+                <div class="smodal-test-banner" id="smodal-test-banner">
+                    <i class="fa-solid fa-flask"></i>
+                    Mode test — Aucun montant réel ne sera débité
+                </div>
+
+                <!-- Header -->
+                <div class="smodal-header">
+                    <div class="smodal-header-text">
+                        <div class="smodal-header-tag">
+                            <i class="fa-solid fa-cart-shopping"></i> Commander
+                        </div>
+                        <h3 class="smodal-title">Votre commande MetaFormX Pro</h3>
+                    </div>
+                    <button class="smodal-close" id="smodal-close" aria-label="Fermer">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Body -->
+                <div class="smodal-body">
+                    <p class="smodal-desc">
+                        Sélectionnez le produit souhaité, ajustez la quantité puis procédez au paiement sécurisé via Stripe. <strong>Veuillez bien vérifier la quantité lors du paiement.</strong>
+                    </p>
+
+                    <!-- Product selection -->
+                    <div class="smodal-products" id="smodal-products">
+                        <div class="smodal-product selected" data-product="woodshield" data-price="1495" id="smodal-prod-shield">
+                            <div class="smodal-radio"></div>
+                            <div class="smodal-prod-info">
+                                <div class="smodal-prod-name"><i class="fa-solid fa-shield-halved" style="margin-right:6px;font-size:.8rem;"></i> WoodShield</div>
+                                <div class="smodal-prod-format">Seau commercial 20 L — Protection 5 ans</div>
+                            </div>
+                            <div class="smodal-prod-price">1 495 $</div>
+                        </div>
+
+                        <div class="smodal-product wash-select" data-product="woodwash" data-price="35.95" id="smodal-prod-wash">
+                            <div class="smodal-radio"></div>
+                            <div class="smodal-prod-info">
+                                <div class="smodal-prod-name"><i class="fa-solid fa-spray-can-sparkles" style="margin-right:6px;font-size:.8rem;"></i> WoodWash</div>
+                                <div class="smodal-prod-format">Vaporisateur 1 L — Nettoyant</div>
+                            </div>
+                            <div class="smodal-prod-price">35,95 $</div>
+                        </div>
+
+                        <div class="smodal-product bio-select" data-product="biopaneloil" data-price="69.95" id="smodal-prod-bio">
+                            <div class="smodal-radio"></div>
+                            <div class="smodal-prod-info">
+                                <div class="smodal-prod-name"><i class="fa-solid fa-leaf" style="margin-right:6px;font-size:.8rem;"></i> Wood Release BIO</div>
+                                <div class="smodal-prod-format">Seau 20 L — Huile à coffrage biologique</div>
+                            </div>
+                            <div class="smodal-prod-price">69,95 $</div>
+                        </div>
+                    </div>
+
+                    <!-- Quantity -->
+                    <div class="smodal-qty-row">
+                        <span class="smodal-qty-label">Quantité :</span>
+                        <div class="smodal-qty-controls">
+                            <button class="smodal-qty-btn" id="smodal-qty-minus" aria-label="Diminuer">−</button>
+                            <span class="smodal-qty-val" id="smodal-qty-val">1</span>
+                            <button class="smodal-qty-btn" id="smodal-qty-plus" aria-label="Augmenter">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Subtotal -->
+                    <div class="smodal-subtotal">
+                        <span class="smodal-subtotal-label">Sous-total :</span>
+                        <span class="smodal-subtotal-amount" id="smodal-subtotal">1 495,00 $</span>
+                    </div>
+
+                    <!-- Checkout button -->
+                    <a href="https://buy.stripe.com/test_aFadR26GJdUF30d2Qz2Ji00" target="_blank" rel="noopener" class="smodal-checkout-btn" id="smodal-checkout-btn">
+                        <i class="fa-solid fa-lock"></i>
+                        Payer avec Stripe
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Footer trust badges -->
+                <div class="smodal-footer">
+                    <div class="smodal-trust">
+                        <span class="smodal-trust-item"><i class="fa-solid fa-lock"></i> SSL Sécurisé</span>
+                        <span class="smodal-trust-item"><i class="fa-brands fa-stripe-s"></i> Stripe</span>
+                        <span class="smodal-trust-item"><i class="fa-brands fa-cc-visa"></i> Visa</span>
+                        <span class="smodal-trust-item"><i class="fa-brands fa-cc-mastercard"></i> Mastercard</span>
+                    </div>
+                    <span class="smodal-secure-text">Paiement 100% sécurisé — Vos données sont protégées par Stripe</span>
+                </div>
+            </div>
+        </div>
 
     </main>
 
