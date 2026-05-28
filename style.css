@@ -3135,3 +3135,30 @@ p  { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8; }
   box-shadow: 0 8px 36px var(--green-glow);
 }
 
+/* ────────────────────────────────────────────────────────────────
+   LANGUAGE SWITCHER
+   ──────────────────────────────────────────────────────────────── */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-head);
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-left: 10px;
+}
+.lang-current {
+  color: var(--orange);
+  cursor: default;
+}
+.lang-sep {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.lang-link {
+  color: var(--text-secondary);
+  transition: color 0.3s var(--ease);
+}
+.lang-link:hover {
+  color: #fff;
+}

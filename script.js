@@ -136,12 +136,14 @@ function initCalculator() {
     return { panels, litres, jugs, washLitres, sprays, savings };
   }
 
+  const isEn = document.documentElement.lang.startsWith('en');
+
   function fmt(n, suffix = '') {
-    return n.toLocaleString('fr-CA') + (suffix ? ' ' + suffix : '');
+    return n.toLocaleString(isEn ? 'en-CA' : 'fr-CA') + (suffix ? ' ' + suffix : '');
   }
 
   function formatMoney(n) {
-    return n.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 });
+    return n.toLocaleString(isEn ? 'en-CA' : 'fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 });
   }
 
   function update() {
@@ -149,11 +151,11 @@ function initCalculator() {
     const { panels, litres, jugs, washLitres, sprays, savings } = calcAll(surface);
 
     // Update displays
-    if (surfaceVal)  surfaceVal.textContent  = fmt(surface, 'pi²');
+    if (surfaceVal)  surfaceVal.textContent  = fmt(surface, isEn ? 'sq ft' : 'pi²');
     if (panelsNum)   panelsNum.textContent   = fmt(panels);
     if (resVolume)   resVolume.textContent   = litres + ' L';
-    if (resJugs)     resJugs.textContent     = jugs + (jugs > 1 ? ' seaux' : ' seau');
-    if (resSprays)   resSprays.textContent   = sprays + (sprays > 1 ? ' bouteilles' : ' bouteille');
+    if (resJugs)     resJugs.textContent     = jugs + (isEn ? (jugs > 1 ? ' pails' : ' pail') : (jugs > 1 ? ' seaux' : ' seau'));
+    if (resSprays)   resSprays.textContent   = sprays + (isEn ? (sprays > 1 ? ' bottles' : ' bottle') : (sprays > 1 ? ' bouteilles' : ' bouteille'));
     if (calcSavings) calcSavings.textContent = formatMoney(savings);
 
     // Update WoodWash display if present
@@ -288,10 +290,12 @@ function updateSubtotal() {
   const price = productPrices[selectedProduct] || 0;
   const subtotal = price * selectedQty;
   
-  // Format subtotal in French Canadian style
+  const isEn = document.documentElement.lang.startsWith('en');
+  
+  // Format subtotal based on language
   const subtotalEl = document.getElementById('smodal-subtotal');
   if (subtotalEl) {
-    subtotalEl.textContent = subtotal.toLocaleString('fr-CA', { 
+    subtotalEl.textContent = subtotal.toLocaleString(isEn ? 'en-CA' : 'fr-CA', { 
       style: 'currency', 
       currency: 'CAD', 
       minimumFractionDigits: 2, 
