@@ -460,6 +460,22 @@ p  { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8; }
   text-transform: uppercase;
   letter-spacing: .1em;
 }
+.logo-img-company {
+  height: 42px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+  transition: transform 0.3s var(--ease);
+}
+.logo:hover .logo-img-company {
+  transform: scale(1.02);
+}
+@media (max-width: 580px) {
+  .logo-img-company {
+    height: 32px;
+  }
+}
 .logo-sep {
   color: var(--border-medium);
   font-size: 1.1rem;
