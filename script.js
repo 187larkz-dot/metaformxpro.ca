@@ -447,58 +447,54 @@ function initStickyPurchaseBar() {
     { id: 'biopaneloil', key: 'biopaneloil' }
   ];
 
-  const handleScroll = () => {
+  function updateBarProduct() {
     if (isDismissed) return;
 
-    const hero = document.getElementById('hero');
-    const contact = document.getElementById('contact');
-    
-    const scrollY = window.scrollY;
     const viewportHeight = window.innerHeight;
-    
-    const heroBottom = hero ? hero.getBoundingClientRect().bottom + scrollY : 600;
-    const contactTop = contact ? contact.getBoundingClientRect().top + scrollY : 99999;
-    
-    // Show bar between bottom of hero and top of contact section
-    const shouldShow = scrollY > (heroBottom - 80) && (scrollY + viewportHeight) < (contactTop + 40);
 
-    if (shouldShow) {
-      // Find which product section is active
-      let currentActive = 'woodshield';
-      let minDistance = Infinity;
+    // Find which product section is closest to the center of the viewport
+    let currentActive = activeProduct;
+    let minDistance = Infinity;
 
-      sections.forEach(sec => {
-        const el = document.getElementById(sec.id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          // We want the section closest to the middle of the viewport
-          const distance = Math.abs(rect.top + rect.height / 2 - viewportHeight / 2);
-          if (distance < minDistance) {
-            minDistance = distance;
-            currentActive = sec.key;
-          }
+    sections.forEach(sec => {
+      const el = document.getElementById(sec.id);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        const distance = Math.abs(rect.top + rect.height / 2 - viewportHeight / 2);
+        if (distance < minDistance) {
+          minDistance = distance;
+          currentActive = sec.key;
         }
-      });
-
-      // Update bar info if active product changed
-      if (activeProduct !== currentActive) {
-        activeProduct = currentActive;
-        const pInfo = products[activeProduct];
-        
-        if (prodImg) prodImg.src = pInfo.image;
-        if (prodTitle) prodTitle.textContent = pInfo.name;
-        if (prodFormat) prodFormat.textContent = pInfo.format;
-        if (prodPrice) prodPrice.textContent = pInfo.price;
-        
-        bar.setAttribute('data-theme', activeProduct);
       }
+    });
 
-      bar.classList.add('active');
-    } else {
-      bar.classList.remove('active');
+    // Update bar info if active product changed
+    if (activeProduct !== currentActive) {
+      activeProduct = currentActive;
+      const pInfo = products[activeProduct];
+
+      // Smooth content swap with a quick fade
+      bar.style.transition = 'transform 0.5s var(--ease-prem), opacity 0.4s var(--ease), border-color 0.35s var(--ease), box-shadow 0.35s var(--ease)';
+
+      if (prodImg) prodImg.src = pInfo.image;
+      if (prodTitle) prodTitle.textContent = pInfo.name;
+      if (prodFormat) prodFormat.textContent = pInfo.format;
+      if (prodPrice) prodPrice.textContent = pInfo.price;
+
+      bar.setAttribute('data-theme', activeProduct);
     }
+
+    // Always keep the bar visible (not dismissed)
+    bar.classList.add('active');
+  }
+
+  const handleScroll = () => {
+    if (isDismissed) return;
+    updateBarProduct();
   };
 
   window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll(); // run once on load
+
+  // Show immediately on page load without waiting for scroll
+  updateBarProduct();
 }
