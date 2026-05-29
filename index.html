@@ -52,6 +52,7 @@
         {
           "@type": "Product",
           "name": "WoodShield",
+          "image": "https://metaformxpro.ca/wood%20shield%20presentation%20good.png",
           "description": "Protecteur révolutionnaire pour panneaux de coffrage en bois. Protection jusqu'à 5 ans, sans trace sur le béton.",
           "brand": {
             "@type": "Brand",
@@ -65,12 +66,48 @@
             "url": "https://metaformxpro.ca/",
             "seller": {
               "@id": "https://locationcoffrages.ca/#organization"
+            },
+            "shippingDetails": {
+              "@type": "OfferShippingDetails",
+              "shippingRate": {
+                "@type": "MonetaryAmount",
+                "value": "0.00",
+                "currency": "CAD"
+              },
+              "shippingDestination": {
+                "@type": "DefinedRegion",
+                "addressCountry": "CA"
+              },
+              "deliveryTime": {
+                "@type": "ShippingDeliveryTime",
+                "handlingTime": {
+                  "@type": "QuantitativeValue",
+                  "minValue": 0,
+                  "maxValue": 1,
+                  "unitCode": "DAY"
+                },
+                "transitTime": {
+                  "@type": "QuantitativeValue",
+                  "minValue": 1,
+                  "maxValue": 3,
+                  "unitCode": "DAY"
+                }
+              }
+            },
+            "hasMerchantReturnPolicy": {
+              "@type": "MerchantReturnPolicy",
+              "applicableCountry": "CA",
+              "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnPeriod",
+              "merchantReturnDays": 30,
+              "returnMethod": "https://schema.org/ReturnByMail",
+              "returnFees": "https://schema.org/FreeReturn"
             }
           }
         },
         {
           "@type": "Product",
           "name": "WoodWash",
+          "image": "https://metaformxpro.ca/WoodWash%20descriptif%20Good.png",
           "description": "Nettoyant sans effort qui décompose le béton incrusté sur le coffrage.",
           "brand": {
             "@type": "Brand",
@@ -84,12 +121,48 @@
             "url": "https://metaformxpro.ca/",
             "seller": {
               "@id": "https://locationcoffrages.ca/#organization"
+            },
+            "shippingDetails": {
+              "@type": "OfferShippingDetails",
+              "shippingRate": {
+                "@type": "MonetaryAmount",
+                "value": "0.00",
+                "currency": "CAD"
+              },
+              "shippingDestination": {
+                "@type": "DefinedRegion",
+                "addressCountry": "CA"
+              },
+              "deliveryTime": {
+                "@type": "ShippingDeliveryTime",
+                "handlingTime": {
+                  "@type": "QuantitativeValue",
+                  "minValue": 0,
+                  "maxValue": 1,
+                  "unitCode": "DAY"
+                },
+                "transitTime": {
+                  "@type": "QuantitativeValue",
+                  "minValue": 1,
+                  "maxValue": 3,
+                  "unitCode": "DAY"
+                }
+              }
+            },
+            "hasMerchantReturnPolicy": {
+              "@type": "MerchantReturnPolicy",
+              "applicableCountry": "CA",
+              "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnPeriod",
+              "merchantReturnDays": 30,
+              "returnMethod": "https://schema.org/ReturnByMail",
+              "returnFees": "https://schema.org/FreeReturn"
             }
           }
         },
         {
           "@type": "Product",
           "name": "Wood Release BIO",
+          "image": "https://metaformxpro.ca/Wood%20release%20bio%20good.png",
           "description": "Agent de démoulage 100% végétal et biodégradable.",
           "brand": {
             "@type": "Brand",
@@ -103,6 +176,41 @@
             "url": "https://metaformxpro.ca/",
             "seller": {
               "@id": "https://locationcoffrages.ca/#organization"
+            },
+            "shippingDetails": {
+              "@type": "OfferShippingDetails",
+              "shippingRate": {
+                "@type": "MonetaryAmount",
+                "value": "0.00",
+                "currency": "CAD"
+              },
+              "shippingDestination": {
+                "@type": "DefinedRegion",
+                "addressCountry": "CA"
+              },
+              "deliveryTime": {
+                "@type": "ShippingDeliveryTime",
+                "handlingTime": {
+                  "@type": "QuantitativeValue",
+                  "minValue": 0,
+                  "maxValue": 1,
+                  "unitCode": "DAY"
+                },
+                "transitTime": {
+                  "@type": "QuantitativeValue",
+                  "minValue": 1,
+                  "maxValue": 3,
+                  "unitCode": "DAY"
+                }
+              }
+            },
+            "hasMerchantReturnPolicy": {
+              "@type": "MerchantReturnPolicy",
+              "applicableCountry": "CA",
+              "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnPeriod",
+              "merchantReturnDays": 30,
+              "returnMethod": "https://schema.org/ReturnByMail",
+              "returnFees": "https://schema.org/FreeReturn"
             }
           }
         }
@@ -434,6 +542,7 @@
                         <button class="btn btn-primary btn-prod aos-fade-up delay-4" id="woodshield-cta" onclick="openStripeModal('woodshield')">
                             <i class="fa-solid fa-cart-shopping"></i> Commander le WoodShield
                         </button>
+                        <span class="btn-trust-subtext aos-fade-up delay-4"><i class="fa-solid fa-truck-fast"></i> Expédié sous 24/48h • Paiement Stripe sécurisé</span>
                         <div class="payment-badges">
                             <span class="payment-badge"><i class="fa-brands fa-cc-visa"></i> Visa</span>
                             <span class="payment-badge"><i class="fa-brands fa-cc-mastercard"></i> MC</span>
@@ -562,6 +671,7 @@
                         <button class="btn btn-wash btn-prod aos-fade-up delay-4" id="woodwash-cta" onclick="openStripeModal('woodwash')">
                             <i class="fa-solid fa-cart-shopping"></i> Commander le WoodWash
                         </button>
+                        <span class="btn-trust-subtext aos-fade-up delay-4"><i class="fa-solid fa-truck-fast"></i> Expédié sous 24/48h • Paiement Stripe sécurisé</span>
                         <div class="payment-badges">
                             <span class="payment-badge"><i class="fa-brands fa-cc-visa"></i> Visa</span>
                             <span class="payment-badge"><i class="fa-brands fa-cc-mastercard"></i> MC</span>
@@ -723,6 +833,7 @@
                         <button class="btn btn-bio btn-prod aos-fade-up delay-4" id="biopaneloil-cta" onclick="openStripeModal('biopaneloil')">
                             <i class="fa-solid fa-cart-shopping"></i> Commander Wood Release BIO
                         </button>
+                        <span class="btn-trust-subtext aos-fade-up delay-4"><i class="fa-solid fa-truck-fast"></i> Expédié sous 24/48h • Paiement Stripe sécurisé</span>
                         <div class="payment-badges">
                             <span class="payment-badge"><i class="fa-brands fa-cc-visa"></i> Visa</span>
                             <span class="payment-badge"><i class="fa-brands fa-cc-mastercard"></i> MC</span>
@@ -987,17 +1098,9 @@
                                 <span>Volume WoodShield requis</span>
                                 <strong id="res-volume">40 L</strong>
                             </div>
-                            <div class="res-row">
-                                <span>Seaux 20 L nécessaires</span>
-                                <strong id="res-jugs">2 seaux</strong>
-                            </div>
-                            <div class="res-row">
+                            <div class="res-row res-wash-highlight">
                                 <span>WoodWash (nettoyant) requis</span>
                                 <strong id="res-wash">12 L</strong>
-                            </div>
-                            <div class="res-row">
-                                <span>Vaporisateurs 1 L recommandés</span>
-                                <strong id="res-sprays">0 bouteille</strong>
                             </div>
                         </div>
 
@@ -1164,6 +1267,34 @@
                         <span class="smodal-trust-item"><i class="fa-brands fa-cc-mastercard"></i> Mastercard</span>
                     </div>
                     <span class="smodal-secure-text">Paiement 100% sécurisé — Vos données sont protégées par Stripe</span>
+                </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════
+             STICKY FLOATING PURCHASE BAR
+        ═══════════════════════════════════════════ -->
+        <div class="sticky-purchase-bar" id="sticky-purchase-bar">
+            <div class="spb-container">
+                <button class="spb-close" id="spb-close" aria-label="Fermer la barre d'achat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="spb-prod-info">
+                    <div class="spb-img-wrap">
+                        <img src="wood shield presentation good.png" alt="Produit" id="spb-prod-img">
+                    </div>
+                    <div class="spb-details">
+                        <h4 class="spb-title" id="spb-prod-title">WoodShield</h4>
+                        <span class="spb-format" id="spb-prod-format">Seau commercial 20 L</span>
+                    </div>
+                </div>
+                <div class="spb-buy-row">
+                    <div class="spb-price-wrap">
+                        <span class="spb-price" id="spb-prod-price">1 495 $</span>
+                        <span class="spb-tax">+ taxes</span>
+                    </div>
+                    <button class="btn spb-buy-btn" id="spb-buy-btn">
+                        <i class="fa-solid fa-cart-shopping"></i> Commander <span class="spb-btn-extra">maintenant</span>
+                    </button>
                 </div>
             </div>
         </div>

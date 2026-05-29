@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavHighlight();
   initSliderGradient();
   initStripeModal();
+  initStickyPurchaseBar();
 });
 
 
@@ -109,8 +110,6 @@ function initCalculator() {
   const surfaceVal   = document.getElementById('surface-val');
   const panelsNum    = document.getElementById('panels-num');
   const resVolume    = document.getElementById('res-volume');
-  const resJugs      = document.getElementById('res-jugs');
-  const resSprays    = document.getElementById('res-sprays');
   const calcSavings  = document.getElementById('calc-savings');
 
   if (!slider) return;
@@ -128,12 +127,10 @@ function initCalculator() {
   function calcAll(surface) {
     const panels     = Math.ceil(surface / PANEL_AREA);         // nombre de panneaux
     const litres     = Math.ceil(surface / COVERAGE_PER_LITRE); // litres WoodShield
-    const jugs       = Math.ceil(litres / 20);                  // seaux 20L
     const washLitres = Math.ceil(surface / WOODWASH_COVERAGE);  // litres WoodWash
-    const sprays     = surface > 500 ? Math.ceil(surface / 500) : 0; // vaporisateurs 1L
     const savings    = Math.round(surface * SAVINGS_PER_SQFT);  // $ sur 5 ans
 
-    return { panels, litres, jugs, washLitres, sprays, savings };
+    return { panels, litres, washLitres, savings };
   }
 
   const isEn = document.documentElement.lang.startsWith('en');
@@ -148,14 +145,12 @@ function initCalculator() {
 
   function update() {
     const surface = parseInt(slider.value, 10);
-    const { panels, litres, jugs, washLitres, sprays, savings } = calcAll(surface);
+    const { panels, litres, washLitres, savings } = calcAll(surface);
 
     // Update displays
     if (surfaceVal)  surfaceVal.textContent  = fmt(surface, isEn ? 'sq ft' : 'pi²');
     if (panelsNum)   panelsNum.textContent   = fmt(panels);
     if (resVolume)   resVolume.textContent   = litres + ' L';
-    if (resJugs)     resJugs.textContent     = jugs + (isEn ? (jugs > 1 ? ' pails' : ' pail') : (jugs > 1 ? ' seaux' : ' seau'));
-    if (resSprays)   resSprays.textContent   = sprays + (isEn ? (sprays > 1 ? ' bottles' : ' bottle') : (sprays > 1 ? ' bouteilles' : ' bouteille'));
     if (calcSavings) calcSavings.textContent = formatMoney(savings);
 
     // Update WoodWash display if present
@@ -390,4 +385,120 @@ function initStripeModal() {
   
   // Initialize subtotal once on load
   updateSubtotal();
+}
+
+/* ─────────────────────────────────────────────
+   8. STICKY FLOATING PURCHASE BAR
+   ───────────────────────────────────────────── */
+function initStickyPurchaseBar() {
+  const bar = document.getElementById('sticky-purchase-bar');
+  const closeBtn = document.getElementById('spb-close');
+  const buyBtn = document.getElementById('spb-buy-btn');
+  const prodImg = document.getElementById('spb-prod-img');
+  const prodTitle = document.getElementById('spb-prod-title');
+  const prodFormat = document.getElementById('spb-prod-format');
+  const prodPrice = document.getElementById('spb-prod-price');
+
+  if (!bar || !buyBtn) return;
+
+  const isEn = document.documentElement.lang.startsWith('en');
+  const products = {
+    woodshield: {
+      name: "WoodShield",
+      format: isEn ? "Commercial 20 L Pail" : "Seau commercial 20 L",
+      price: isEn ? "$1,495" : "1 495 $",
+      image: "wood shield presentation good.png"
+    },
+    woodwash: {
+      name: "WoodWash",
+      format: isEn ? "1 L Sprayer" : "Vaporisateur 1 L",
+      price: isEn ? "$35.95" : "35,95 $",
+      image: "WoodWash descriptif Good.png"
+    },
+    biopaneloil: {
+      name: "Wood Release BIO",
+      format: isEn ? "20 L Pail" : "Seau 20 L",
+      price: isEn ? "$69.95" : "69,95 $",
+      image: "Wood release bio good.png"
+    }
+  };
+
+  let activeProduct = 'woodshield';
+  let isDismissed = false;
+
+  // Close button click handler
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      isDismissed = true;
+      bar.classList.remove('active');
+    });
+  }
+
+  // Set click handler on purchase button to open the existing payment modal
+  buyBtn.addEventListener('click', () => {
+    if (window.openStripeModal) {
+      window.openStripeModal(activeProduct);
+    }
+  });
+
+  const sections = [
+    { id: 'woodshield', key: 'woodshield' },
+    { id: 'woodwash', key: 'woodwash' },
+    { id: 'biopaneloil', key: 'biopaneloil' }
+  ];
+
+  const handleScroll = () => {
+    if (isDismissed) return;
+
+    const hero = document.getElementById('hero');
+    const contact = document.getElementById('contact');
+    
+    const scrollY = window.scrollY;
+    const viewportHeight = window.innerHeight;
+    
+    const heroBottom = hero ? hero.getBoundingClientRect().bottom + scrollY : 600;
+    const contactTop = contact ? contact.getBoundingClientRect().top + scrollY : 99999;
+    
+    // Show bar between bottom of hero and top of contact section
+    const shouldShow = scrollY > (heroBottom - 80) && (scrollY + viewportHeight) < (contactTop + 40);
+
+    if (shouldShow) {
+      // Find which product section is active
+      let currentActive = 'woodshield';
+      let minDistance = Infinity;
+
+      sections.forEach(sec => {
+        const el = document.getElementById(sec.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          // We want the section closest to the middle of the viewport
+          const distance = Math.abs(rect.top + rect.height / 2 - viewportHeight / 2);
+          if (distance < minDistance) {
+            minDistance = distance;
+            currentActive = sec.key;
+          }
+        }
+      });
+
+      // Update bar info if active product changed
+      if (activeProduct !== currentActive) {
+        activeProduct = currentActive;
+        const pInfo = products[activeProduct];
+        
+        if (prodImg) prodImg.src = pInfo.image;
+        if (prodTitle) prodTitle.textContent = pInfo.name;
+        if (prodFormat) prodFormat.textContent = pInfo.format;
+        if (prodPrice) prodPrice.textContent = pInfo.price;
+        
+        bar.setAttribute('data-theme', activeProduct);
+      }
+
+      bar.classList.add('active');
+    } else {
+      bar.classList.remove('active');
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll(); // run once on load
 }
