@@ -612,8 +612,8 @@ p  { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8; }
 
 /* Mobile Language Switcher Row */
 .mob-lang-switcher-row {
-  margin-top: auto;
-  padding-top: 20px;
+  margin-top: 24px;
+  padding-top: 16px;
   border-top: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
