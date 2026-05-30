@@ -59,6 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Render Initial Cart UI
     updateCartUI();
+
+    // Check URL parameters for auto-add
+    handleUrlParams();
 });
 
 // 4. STORAGE LOGIC
@@ -354,4 +357,22 @@ function initCartUiListeners() {
             window.closeCart();
         }
     });
+}
+
+// 11. HANDLE URL PARAMETERS (AUTO ADD TO CART)
+function handleUrlParams() {
+    try {
+        const params = new URLSearchParams(window.location.search);
+        const addProduct = params.get('add');
+        if (addProduct && PRODUCTS_DATA[addProduct]) {
+            // Automatically add product to cart
+            window.addToCart(addProduct);
+            
+            // Clean up the URL parameters so a refresh doesn't add the item again
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+            window.history.replaceState({ path: cleanUrl }, '', cleanUrl);
+        }
+    } catch (e) {
+        console.error('Error handling URL params', e);
+    }
 }

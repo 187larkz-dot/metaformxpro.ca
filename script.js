@@ -434,11 +434,10 @@ function initStickyPurchaseBar() {
     });
   }
 
-  // Set click handler on purchase button to open the existing payment modal
+  // Redirect to the shop page with the active product as query parameter
   buyBtn.addEventListener('click', () => {
-    if (window.openStripeModal) {
-      window.openStripeModal(activeProduct);
-    }
+    const page = isEn ? 'boutique-en.html' : 'boutique.html';
+    window.location.href = `${page}?add=${activeProduct}`;
   });
 
   const sections = [
