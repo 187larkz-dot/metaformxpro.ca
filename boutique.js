@@ -15,7 +15,7 @@ const PRODUCTS_DATA = {
         formatEN: 'Commercial 20 L Pail',
         price: 1495.00,
         image: 'wood shield presentation good.png',
-        stripeUrl: 'https://buy.stripe.com/test_aFadR26GJdUF30d2Qz2Ji00',
+        stripeUrl: 'https://buy.stripe.com/14A28kaVd52o4W899j1B600',
         theme: 'woodshield'
     },
     woodwash: {
@@ -26,7 +26,7 @@ const PRODUCTS_DATA = {
         formatEN: '1 L Sprayer Bottle',
         price: 35.95,
         image: 'WoodWash_under_2MB.jpg',
-        stripeUrl: 'https://buy.stripe.com/test_bJe4gs2qtbMxfMZezh2Ji01',
+        stripeUrl: 'https://buy.stripe.com/9B64gse7pgL69coadn1B601',
         theme: 'woodwash'
     },
     biopaneloil: {
@@ -37,7 +37,7 @@ const PRODUCTS_DATA = {
         formatEN: '20 L Pail',
         price: 69.95,
         image: 'Wood_release_bio_under_2MB.jpg',
-        stripeUrl: 'https://buy.stripe.com/test_aFaaEQ0il17T7gtcr92Ji02',
+        stripeUrl: 'https://buy.stripe.com/28E8wI9R952oewI4T31B602',
         theme: 'biopaneloil'
     }
 };
