@@ -4617,3 +4617,271 @@ p  { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8; }
   .psumm-actions { flex-direction: column; }
   .voir-aussi-grid { grid-template-columns: 1fr; }
 }
+
+
+/* ════════════════════════════════════════════════════════════════
+   CONTACT FORM — Formspree Integration
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Wrapper inserted inside .contact-card ───────────────────── */
+.contact-form-wrap {
+  margin-top: 44px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ── Form header ─────────────────────────────────────────────── */
+.cform-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.cform-header > i {
+  font-size: 1.5rem;
+  color: var(--orange);
+  background: rgba(242,88,5,.1);
+  border: 1px solid rgba(242,88,5,.2);
+  width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 14px;
+  margin-bottom: 4px;
+}
+.cform-header h3 {
+  font-family: var(--font-head);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-bright);
+}
+.cform-header p {
+  font-size: .9rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ── Form layout ─────────────────────────────────────────────── */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cform-row {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.cform-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ── Field group ─────────────────────────────────────────────── */
+.cform-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cform-group label {
+  font-family: var(--font-head);
+  font-size: .82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text-secondary);
+}
+
+/* ── Inputs, Selects, Textareas ──────────────────────────────── */
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"],
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-family: var(--font-body);
+  font-size: .95rem;
+  color: var(--text-primary);
+  transition: border-color .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
+  -webkit-appearance: none;
+  appearance: none;
+}
+.contact-form input[type="text"]::placeholder,
+.contact-form input[type="email"]::placeholder,
+.contact-form input[type="tel"]::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--text-muted);
+}
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form input[type="tel"]:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px var(--orange-glow-sm);
+  background: rgba(242,88,5,.04);
+  outline: none;
+}
+
+/* Select arrow */
+.contact-form select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239a9a9a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 44px;
+  cursor: pointer;
+}
+/* Dark select options (WebKit fallback) */
+.contact-form select option {
+  background: #1a1a1a;
+  color: var(--text-primary);
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.7;
+}
+
+/* ── Submit button ───────────────────────────────────────────── */
+.cform-submit {
+  align-self: flex-start;
+  margin-top: 8px;
+  min-width: 220px;
+  justify-content: center;
+  position: relative;
+}
+.cform-submit.loading .cform-btn-text { opacity: 0; }
+.cform-submit.loading .cform-btn-loading { opacity: 1; }
+.cform-btn-loading {
+  position: absolute;
+  inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+/* ── Success message ─────────────────────────────────────────── */
+.cform-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  padding: 48px 32px;
+  background: rgba(16,185,129,.07);
+  border: 1px solid rgba(16,185,129,.22);
+  border-radius: var(--radius-card);
+  animation: fadeInUp .5s var(--ease-prem) both;
+}
+.cform-success > i {
+  font-size: 3rem;
+  color: var(--green);
+}
+.cform-success h4 {
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+  color: var(--text-bright);
+}
+.cform-success p {
+  font-size: .95rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .cform-two-col {
+    grid-template-columns: 1fr;
+  }
+  .cform-submit {
+    width: 100%;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   18. CARACTÉRISTIQUES TECHNIQUES INDIVIDUELLES (PRODUCT PAGES)
+   ──────────────────────────────────────────────────────────────── */
+.technical-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 32px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 32px;
+}
+.tech-spec-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: rgba(255,255,255,.015);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+  transition: all .3s var(--ease);
+}
+.tech-spec-item:hover {
+  background: rgba(255,255,255,.03);
+  border-color: rgba(252, 88, 5, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+.product-wash .tech-spec-item:hover,
+#woodwash .tech-spec-item:hover {
+  border-color: rgba(0, 180, 216, 0.25);
+}
+.product-bio .tech-spec-item:hover,
+#biopaneloil .tech-spec-item:hover {
+  border-color: rgba(16, 185, 129, 0.25);
+}
+.tech-spec-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(242,88,5,.08);
+  border: 1px solid var(--border-orange);
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.product-wash .tech-spec-icon,
+#woodwash .tech-spec-icon {
+  background: rgba(0, 180, 216, 0.08);
+  border-color: var(--border-wash);
+  color: var(--wash);
+}
+.product-bio .tech-spec-icon,
+#biopaneloil .tech-spec-icon {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: var(--border-green);
+  color: var(--green);
+}
+.tech-spec-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.tech-spec-label {
+  font-family: var(--font-head);
+  font-size: .78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-muted);
+}
+.tech-spec-value {
+  font-size: .88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.tech-spec-value strong {
+  color: var(--text-bright);
+}

@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSliderGradient();
   initStripeModal();
   initStickyPurchaseBar();
+  initContactForm();
 });
 
 

@@ -1,0 +1,7 @@
+note projet 
+
+fixer multi choice pour faire 1 seul facture et 1 seul achat  (achat multiple) (stripe)
+
+adder paypal
+
+faire la section offre de service pour la pose.
