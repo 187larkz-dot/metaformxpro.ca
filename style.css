@@ -2047,6 +2047,21 @@ p  { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8; }
 }
 .footer-brand p { font-size: .9rem; color: var(--text-muted); line-height: 1.7; max-width: 320px; margin-bottom: 20px; }
 
+.footer-social-links {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.footer-social-links a {
+  font-size: 1.35rem;
+  color: var(--text-muted);
+  transition: color .25s var(--ease), transform .25s var(--ease);
+}
+.footer-social-links a:hover {
+  color: #1877F2;
+  transform: translateY(-2px);
+}
+
 .footer-products-tags { display: flex; gap: 10px; flex-wrap: wrap; }
 .ftag {
   font-family: var(--font-head);
