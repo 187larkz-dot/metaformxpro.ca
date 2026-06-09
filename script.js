@@ -484,8 +484,12 @@ function initStickyPurchaseBar() {
       bar.setAttribute('data-theme', activeProduct);
     }
 
-    // Always keep the bar visible (not dismissed)
-    bar.classList.add('active');
+    // Show the bar only when scrolled down past a threshold (e.g., 300px)
+    if (window.scrollY > 300) {
+      bar.classList.add('active');
+    } else {
+      bar.classList.remove('active');
+    }
   }
 
   const handleScroll = () => {
