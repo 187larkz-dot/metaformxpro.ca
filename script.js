@@ -224,9 +224,9 @@ function initNavHighlight() {
    ───────────────────────────────────────────── */
 // Stripe Checkout Links for each product
 const STRIPE_PRODUCT_URLS = {
-  woodshield:   'https://buy.stripe.com/bJe7sEd3l52o4W84T31B604',
-  woodwash:     'https://buy.stripe.com/4gMcMY8N50M84W8adn1B603',
-  biopaneloil:  'https://buy.stripe.com/9B6aEQ6EX1Qc60cdpz1B605' // Wood Release BIO
+  woodshield:   'https://buy.stripe.com/14A28kaVd52o4W899j1B600',
+  woodwash:     'https://buy.stripe.com/9B64gse7pgL69coadn1B601',
+  biopaneloil:  'https://buy.stripe.com/28E8wI9R952oewI4T31B602' // Wood Release BIO
 };
 
 // Global variables for Stripe checkout state
@@ -235,9 +235,9 @@ let selectedQty = 1;
 
 // Price mapping (in CAD)
 const productPrices = {
-  woodshield: 295.00,
-  woodwash: 195.00,
-  biopaneloil: 55.95
+  woodshield: 1495.00,
+  woodwash: 35.95,
+  biopaneloil: 69.95
 };
 
 // Pre-select product in modal and update UI styling
@@ -406,20 +406,20 @@ function initStickyPurchaseBar() {
   const products = {
     woodshield: {
       name: "WoodShield",
-      format: isEn ? "1 US Gallon" : "1 gallon US",
-      price: isEn ? "$295" : "295 $",
+      format: isEn ? "Commercial 20 L Pail" : "Seau commercial 20 L",
+      price: isEn ? "$1,495" : "1 495 $",
       image: "wood shield presentation good.png"
     },
     woodwash: {
       name: "WoodWash",
-      format: isEn ? "5 US Gallons" : "5 gallons US",
-      price: isEn ? "$195" : "195 $",
+      format: isEn ? "1 L Sprayer" : "Vaporisateur 1 L",
+      price: isEn ? "$35.95" : "35,95 $",
       image: "WoodWash descriptif Good.png"
     },
     biopaneloil: {
       name: "Wood Release BIO",
-      format: isEn ? "5 US Gallons" : "5 gallons US",
-      price: isEn ? "$55.95" : "55,95 $",
+      format: isEn ? "20 L Pail" : "Seau 20 L",
+      price: isEn ? "$69.95" : "69,95 $",
       image: "Wood release bio good.png"
     }
   };
