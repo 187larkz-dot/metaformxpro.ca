@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://metaformxpro.ca/sitemap.xml
+Sitemap: https://www.metaformx.pro/sitemap.xml
