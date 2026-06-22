@@ -13,9 +13,9 @@ const PRODUCTS_DATA = {
         nameEN: 'WoodShield',
         formatFR: 'Seau commercial 20 L',
         formatEN: 'Commercial 20 L Pail',
-        price: 1495.00,
+        price: 295.95,
         image: 'wood shield presentation good.png',
-        stripeUrl: 'https://buy.stripe.com/14A28kaVd52o4W899j1B600',
+        stripeUrl: 'https://buy.stripe.com/bJe7sEd3l52o4W84T31B604',
         theme: 'woodshield'
     },
     woodwash: {
@@ -24,9 +24,9 @@ const PRODUCTS_DATA = {
         nameEN: 'WoodWash',
         formatFR: 'Vaporisateur 1 L',
         formatEN: '1 L Sprayer Bottle',
-        price: 35.95,
+        price: 195.00,
         image: 'WoodWash_under_2MB.jpg',
-        stripeUrl: 'https://buy.stripe.com/9B64gse7pgL69coadn1B601',
+        stripeUrl: 'https://buy.stripe.com/4gMcMY8N50M84W8adn1B603',
         theme: 'woodwash'
     },
     biopaneloil: {
@@ -35,9 +35,9 @@ const PRODUCTS_DATA = {
         nameEN: 'Wood Release BIO',
         formatFR: 'Seau 20 L',
         formatEN: '20 L Pail',
-        price: 69.95,
+        price: 55.95,
         image: 'Wood_release_bio_under_2MB.jpg',
-        stripeUrl: 'https://buy.stripe.com/28E8wI9R952oewI4T31B602',
+        stripeUrl: 'https://buy.stripe.com/9B6aEQ6EX1Qc60cdpz1B605',
         theme: 'biopaneloil'
     }
 };
@@ -304,7 +304,7 @@ function formatCurrency(amount) {
     if (isEn) {
         return amount.toLocaleString('en-CA', { style: 'currency', currency: 'CAD' });
     } else {
-        // French format: 1 495,00 $
+        // French format: 295,95 $
         return amount.toLocaleString('fr-CA', { style: 'currency', currency: 'CAD' })
             .replace(/\u00a0/g, ' '); // replace non-breaking spaces with standard ones
     }
